@@ -369,11 +369,13 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
 
     private void resetFieldList() {
         fieldListModel.removeAllElements();
+        fieldList.removeAll();
     }
 
     private void resetTableAndFieldList() {
         tableListModel.removeAllElements();
         fieldListModel.removeAllElements();
+        fieldList.removeAll();
     }
 
 }
