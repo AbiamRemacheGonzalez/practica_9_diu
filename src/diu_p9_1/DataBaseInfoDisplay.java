@@ -13,9 +13,6 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
     public DataBaseInfoDisplay() {
         database = new DataBaseInfoLoader();
         initComponents();
-        tableList.setModel(tableListModel);
-        fieldList.setModel(fieldListModel);
-        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -65,6 +62,7 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
         tablesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Tables"));
         tablesPanel.setPreferredSize(new java.awt.Dimension(250, 340));
 
+        tableList.setToolTipText("Select the tables and click to the search button");
         tableList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableListMouseClicked(evt);
@@ -77,15 +75,14 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
         tablesPanelLayout.setHorizontalGroup(
             tablesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         tablesPanelLayout.setVerticalGroup(
             tablesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -100,7 +97,7 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
             FieldsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FieldsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                 .addContainerGap())
         );
         FieldsPanelLayout.setVerticalGroup(
@@ -120,6 +117,8 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         autenticationPanel.add(jLabel2, gridBagConstraints);
+
+        userField.setToolTipText("Set the User database");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -137,6 +136,7 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
         autenticationPanel.add(jLabel3, gridBagConstraints);
 
         connectButton.setText("Connect");
+        connectButton.setToolTipText("Connect");
         connectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 connectButtonActionPerformed(evt);
@@ -149,6 +149,8 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         autenticationPanel.add(connectButton, gridBagConstraints);
+
+        passwordField.setToolTipText("Set the password of database");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
@@ -256,7 +258,7 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
                     .addComponent(namePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                        .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(FieldsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(autenticationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -271,7 +273,7 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
                 .addComponent(autenticationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                    .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                     .addComponent(FieldsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,27 +287,42 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
 
     private void sigle_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigle_buttonActionPerformed
         // TODO add your handling code here:
+        resetFieldList();
         tableList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }//GEN-LAST:event_sigle_buttonActionPerformed
 
     private void deselectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deselectButtonActionPerformed
         // TODO add your handling code here:
-        tableList.clearSelection();
         resetFieldList();
+        tableList.clearSelection();
     }//GEN-LAST:event_deselectButtonActionPerformed
 
     private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectButtonActionPerformed
         // TODO add your handling code here:
+        resetTableList();
+        resetFieldList();
         database.initialize(userField.getText(), String.valueOf(passwordField.getPassword()));
         if(database.connect()){
-            //resetTableAndFieldList();
             setTableListItems(database.getTables());
         }else{
             JOptionPane.showMessageDialog(rootPane, "Credentials are not correct!", "Connection Refused", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_connectButtonActionPerformed
 
+    private void single_interval_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_single_interval_buttonActionPerformed
+        // TODO add your handling code here:
+        resetFieldList();
+        tableList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+    }//GEN-LAST:event_single_interval_buttonActionPerformed
+
+    private void multiple_interval_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiple_interval_buttonActionPerformed
+        // TODO add your handling code here:
+        resetFieldList();
+        tableList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    }//GEN-LAST:event_multiple_interval_buttonActionPerformed
+
     private void tableListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableListMouseClicked
+        // TODO add your handling code here:
         resetFieldList();
         if(evt.getClickCount()==1){
             int[] indices = tableList.getSelectedIndices();
@@ -323,16 +340,6 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_tableListMouseClicked
-
-    private void single_interval_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_single_interval_buttonActionPerformed
-        // TODO add your handling code here:
-        tableList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-    }//GEN-LAST:event_single_interval_buttonActionPerformed
-
-    private void multiple_interval_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiple_interval_buttonActionPerformed
-        // TODO add your handling code here:
-        tableList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-    }//GEN-LAST:event_multiple_interval_buttonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -368,14 +375,13 @@ public class DataBaseInfoDisplay extends javax.swing.JFrame {
     }
 
     private void resetFieldList() {
-        fieldListModel.removeAllElements();
-        fieldList.removeAll();
+        fieldListModel = new DefaultListModel();
+        fieldList.setModel(fieldListModel);
     }
 
-    private void resetTableAndFieldList() {
-        tableListModel.removeAllElements();
-        fieldListModel.removeAllElements();
-        fieldList.removeAll();
+    private void resetTableList() {
+        tableListModel = new DefaultListModel();
+        tableList.setModel(tableListModel);
     }
 
 }

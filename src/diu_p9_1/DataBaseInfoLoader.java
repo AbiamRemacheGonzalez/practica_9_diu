@@ -19,9 +19,6 @@ public class DataBaseInfoLoader {
     private ArrayList<String> tables;
     private ArrayList<String> fields;
 
-
-    
-    
     public void initialize(String user, String password){
         this.user = user;
         this.password = password;
@@ -40,6 +37,7 @@ public class DataBaseInfoLoader {
         return true;
     }
     public ArrayList<String> getTables(){
+        this.tables.clear();
         try {
             String[] types = {"TABLE"};
             ResultSet rs = md.getTables(null, null, "%", types);
@@ -53,6 +51,7 @@ public class DataBaseInfoLoader {
         return tables;
     }
     public ArrayList<String> getFieldsTable(String table){
+        this.fields.clear();
         ResultSet rs2;
         try {
             rs2 = md.getColumns(null, null, table, null);
